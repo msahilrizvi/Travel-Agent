@@ -9,11 +9,9 @@ from langchain.chains import LLMChain
 
 # Initialize Streamlit app settings
 st.set_page_config(page_title="Travel Itinerary Planner", page_icon="✈️", layout="wide")
-# Get API key
-with open("groq_api_key.txt", "r") as file:
-    api_key = file.read().strip()
+groq_api_key = st.secrets["groq"]["api_key"]
 # Initialize LLM with Groq
-os.environ["GROQ_API_KEY"] = api_key # Use your API key from Streamlit secrets
+os.environ["GROQ_API_KEY"] = groq_api_key # Use your API key from Streamlit secrets
 @st.cache_resource
 def get_llm():
     return ChatGroq(
